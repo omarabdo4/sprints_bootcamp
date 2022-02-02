@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# eval "cat" $1 " > " $2
+
+eval "cp ${1} ${2}"

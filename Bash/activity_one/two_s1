@@ -1,0 +1,3 @@
+#!/bin/bash
+x=5
+eval "./two_s2 ${x}"

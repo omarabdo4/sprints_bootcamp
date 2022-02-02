@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "echo from s2 " $1

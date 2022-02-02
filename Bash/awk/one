@@ -1,0 +1,2 @@
+#!/bin/bash
+awk -F : '{print $5}' /etc/passwd

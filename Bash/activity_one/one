@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "please enter your name :"
+read x
+echo "hello,${x}"

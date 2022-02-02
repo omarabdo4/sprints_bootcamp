@@ -1,0 +1,2 @@
+#!/bin/bash
+eval "cp -R ${1} ${2}"
