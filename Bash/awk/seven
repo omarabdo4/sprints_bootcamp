@@ -1,2 +1,2 @@
 #!/bin/bash
-awk -F : 'BEGIN {max = 0} {if ($3>max) max=$3} END {print $0}' /etc/passwd
+awk -F : 'BEGIN {max = 0;maxlineNo=0} {if ($3>max) max=$3;maxlineNo=NR} END {print $"maxlineNo"}' /etc/passwd
