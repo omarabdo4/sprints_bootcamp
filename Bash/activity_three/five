@@ -1,0 +1,49 @@
+#!/bin/bash
+select fruit in Apple Banana Kiwi Quit; do
+    case $fruit in
+        Apple)
+            select color in Red Yellow Green; do
+                case $color in
+                    Red)
+                        echo "Red Apple"
+                        ;;                    
+                    Yellow)
+                        echo "Yellow Apple"
+                        ;;
+                    Green)
+                        echo "Green Apple"
+                        ;;
+                    *)
+                        echo "Apple"
+                        ;;
+                esac
+            break
+            done
+            ;;
+        Banana)
+            select color in Yellow Green; do
+                case $color in
+                    Green)
+                        echo "Green Banana"
+                        ;;                    
+                    Yellow)
+                        echo "Yellow Banana"
+                        ;;
+                    *)
+                        echo "Apple"
+                        ;;
+                esac
+            break
+            done
+            ;;
+        Kiwi)
+            echo "Kiwi"
+            ;;
+        Quit)
+            break
+            ;;
+        *)
+            echo "Nothing"
+            ;;
+    esac
+done

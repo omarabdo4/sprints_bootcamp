@@ -1,0 +1,26 @@
+#!/bin/bash
+echo "please enter string : "
+read str
+echo " "
+
+if [[ $str =~ [A-Z] ]]
+then
+    if [[ $str =~ [a-z]|[0-9]  ]]
+    then
+        echo "Mix"
+    else
+        echo "Upper"
+    fi
+else 
+    if [[ $str =~ [a-z] ]]
+    then
+        echo "lower"
+    else
+        if [[ $str =~ [0-9] ]]
+        then 
+            echo "number"
+        else
+            echo "nothing"
+        fi
+    fi
+fi

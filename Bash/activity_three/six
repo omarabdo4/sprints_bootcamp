@@ -1,0 +1,15 @@
+#!/bin/bash
+select country in France England; do
+    case $country in
+        France)
+            echo "French"
+            ;;
+        England)
+            echo "English"
+            ;;
+        *)
+            echo "Nothing"
+            ;;
+    esac
+break
+done

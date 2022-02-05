@@ -1,0 +1,30 @@
+#!/bin/bash
+select week_day in Saturday Sunday Monday Tuesday Wednesday Thursday Friday; do
+    case $week_day in
+        Saturday)
+            echo "this day is Saturday"
+            ;;
+        Sunday)
+            echo "this day is Sunday"
+            ;;
+        Monday)
+            echo "this day is Monday"
+            ;;
+        Tuesday)
+            echo "this day is Tuesday"
+            ;;
+        Wednesday)
+            echo "this day is Wednesday"
+            ;;
+        Thursday)
+            echo "this day is Thursday"
+            ;;
+        Friday)
+            echo "this day is Friday"
+            ;;
+        *)
+            echo "Nothing"
+            ;;
+    esac
+break
+done

@@ -1,0 +1,7 @@
+#!/bin/bash
+test -w $1 && echo "writable"
+
+test -r $1 && echo "readable"
+
+test -x $1 && echo "executable"
+

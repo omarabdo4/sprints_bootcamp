@@ -1,0 +1,71 @@
+#!/bin/bash
+echo "please enter string : "
+read str
+echo " "
+
+# if [[ $str =~ [A-Z] ]]
+# then
+#     if [[ $str =~ [a-z] ]]
+#     then
+#         echo "Mix"
+#     else
+#         echo "Upper"
+#     fi
+# else 
+#     if [[ $str =~ [a-z] ]]
+#     then
+#         echo "lower"
+#     else
+#         if [[ $str =~ [0-9] ]]
+#         then 
+#             echo "number"
+#         else
+#             echo "nothing"
+#         fi
+#     fi
+# fi
+
+
+hasUpper=0
+hasLower=0
+hasNumber=0
+
+for ((index=0; index <= ${#str} ; index++))
+do
+    case ${str:$index:1} in
+        [A-Z])
+            hasUpper=1
+            ;;
+        [a-z])
+            hasLower=1
+            ;;
+        [0-9])
+            hasNumber=1
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
+if [[ $hasUpper == 1 ]]
+then
+    if [[ $hasLower == 1 ]]
+    then
+        echo "Mix"
+    else
+        echo "Upper"
+    fi
+else 
+    if [[ $hasLower == 1 ]]
+    then
+        echo "lower"
+    else
+        if [[ $hasNumber == 1 ]]
+        then 
+            echo "number"
+        else
+            echo "nothing"
+        fi
+    fi
+fi
