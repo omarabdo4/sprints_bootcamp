@@ -1,1 +1,19 @@
+#!/bin/bash
+echo "please enter one character : "
+read -n1 char
+echo " "
 
+case "$char" in
+    [A-Z])
+        echo "Upper Case"
+        ;;
+    [a-z])
+        echo "Lower Case"
+        ;;
+    [0-9])
+        echo "Number"
+        ;;
+    *)
+        echo "Nothing"
+        ;;
+esac
