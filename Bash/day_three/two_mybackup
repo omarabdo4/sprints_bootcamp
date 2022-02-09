@@ -1,0 +1,7 @@
+#!/bin/bash
+X=$(ls -p /home/sloppy|grep -v /)
+mkdir /home/sloppy/backup/ 
+for i in ${X} 
+do 
+cp '/home/sloppy/'$i '/home/sloppy/backup' 
+done 

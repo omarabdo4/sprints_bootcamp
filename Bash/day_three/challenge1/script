@@ -1,0 +1,14 @@
+#!/bin/bash 
+
+C=$(find . -name 'Omar*' -type f|wc -l)
+
+if [ $C == 0 ]
+then
+C=1
+fi
+
+
+for ((a=$C; a <= $(($C + 25)) ; a++))
+do
+touch "Omar"$a
+done

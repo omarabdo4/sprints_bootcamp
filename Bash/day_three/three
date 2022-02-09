@@ -1,0 +1,43 @@
+#!/bin/bash
+echo "baaasha, ekteb el id b3d eznak : "
+read inputId
+
+id=`awk -F "," '$1=='$inputId' {print $1}' mycsv`
+
+while [ -z $id ]
+do
+
+    echo "wrong id, please enter a valid one : "
+    read inputId
+    id=`awk -F "," '$1=='$inputId' {print $1}' mycsv`
+
+done
+
+name=`awk -F "," '$1=='$inputId' {print $2}' mycsv`
+password=`awk -F "," '$1=='$inputId' {print $3}' mycsv`
+
+echo "Hello ya $name basha"
+
+echo "please enter old password : "
+read inputPass
+
+while [ $inputPass != $password ]
+do
+
+    echo "wrong password, please enter a correct old password : "
+    read inputPass
+
+done
+
+
+echo "3aaash, enter the new password : "
+read newPass
+
+
+oldLine=`awk -F "," '$1=='$inputId' {print $0} ' mycsv`
+newLine=`awk -F "," '$1=='$inputId' {gsub($3, inp); print} ' inp="${newPass}" mycsv`
+# echo "$newLine"
+
+sed -i "s/$oldLine/$newLine/g" mycsv
+
+echo "password changed successfully"

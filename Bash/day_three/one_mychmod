@@ -1,0 +1,6 @@
+#!/bin/bash
+X=$(ls -p /home/sloppy|grep -v /) 
+for i in ${X} 
+do
+echo $i chmod +x '/home/sloppy'$i 
+done 
