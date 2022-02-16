@@ -1,0 +1,52 @@
+1- Install docker
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+2- List all running containers
+docker ps
+3- List all containers in your system
+docker ps -a
+4- List all images in your system
+docker image ls
+5- Pull nginx image and give it a name
+docker pull nginx
+docker image tag myNginx nginx
+
+6- Try to run nginx.
+       * Did it work? 
+       * Why?
+       * How to make it work?
+
+docker run nginx
+yes it did work 
+
+7- Watch container logs
+docker log [container_id]
+
+8- Try inspect container ip
+docker inspect [container_id]
+
+9- Try to execute inside nginx continer
+
+docker exec -it [container_id] sh
+
+10- Try to remove nginx image. 
+       * Did it work? 
+       * Why?
+       * How to solve it?
+docker rmi nginx
+it doesn't work because we have a container based on it
+we can either force remove it using option --force or removing all containers based on it
+11- Try run ubuntu container.
+       * Did it work?  
+       * Why?
+       * How to make it work?
+yes is did
+12- Create a file inside ubuntu container
+docker exec -it [container_id] sh
+
+13- Exit the container.
+exit / control C
+
+14- Try to start it again. 
+       * Did you find the file?
+yes
