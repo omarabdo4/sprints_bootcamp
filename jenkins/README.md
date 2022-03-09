@@ -51,18 +51,13 @@ docker run -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins
 
 08) Install role based authorization plugin.
 
-
-![screen1](https://github.com/omarabdo4/sprints_rails/blob/screenshots/screen1.png?raw=true "screen1")
+![screen1](https://github.com/omarabdo4/sprints_bootcamp/blob/main/jenkins/screen1.png?raw=true "screen1")
 
 09) Create new user.
-
-![screen2](https://github.com/omarabdo4/sprints_rails/blob/screenshots/screen2.png?raw=true "screen2")
-
 10) Create read role and assign it to the new user
 
-![screen3](https://github.com/omarabdo4/sprints_rails/blob/screenshots/screen3.png?raw=true "screen3")
+![screen2](https://github.com/omarabdo4/sprints_bootcamp/blob/main/jenkins/screen2.png?raw=true "screen2")
 
 11) Create free style project and link it to private git repo(inside it create directory and create file with "hello world").
 
-![screen4](https://github.com/omarabdo4/sprints_rails/blob/screenshots/screen4.png?raw=true "screen4")
-
+![screen3](https://github.com/omarabdo4/sprints_bootcamp/blob/main/jenkins/screen3.png?raw=true "screen3")
