@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: beta
+  labels:
+    app: beta
+  namespace: finance
+
+spec:
+  template:
+    metadata:
+      name: beta-pod
+      labels:
+        app: beta-pod
+
+    spec:
+      containers:
+        - name: beta-container
+          image: redis
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: .5
+            limits:
+              memory: "2Gi"
+              cpu: 1
+  replicas: 2
+  selector:
+    matchLabels:
+      app: beta-pod

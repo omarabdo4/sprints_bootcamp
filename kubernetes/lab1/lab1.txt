@@ -1,0 +1,161 @@
+1- Install k8s cluster (minikube) (optional you can use https://www.katacoda.com/courses/kubernetes/playground)
+
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+minikube start
+
+2- Create a pod with the name Redis and with the image Redis.
+
+kubectl create -f redis_pod.yaml
+
+3- Create a pod with the name Nginx and with the image nginx123.
+
+Use a pod-definition YAML file. And yes the image name is wrong!
+
+kubectl create -f nginx_pod.yaml
+
+4- What is the Nginx pod status?
+
+ErrImagePull
+
+5- Change the Nginx pod image to Nginx check the status again
+
+kubectl apply -f nginx_pod.yaml
+
+6- How many ReplicaSets exist on the system?
+
+zero (kubectl get rs)
+
+7- Create a ReplicaSet with
+
+    name= replica-set-1
+
+    image= busybox
+
+    replicas= 3
+
+kubectl create -f replica_set_1.yaml
+
+
+8- Scale the ReplicaSet replica-set-1 to 5 PODs.
+
+kubectl apply -f replica_set_1.yaml
+
+9- How many PODs are READY in the replica-set-1?
+
+zero
+
+10- Delete any one of the 5 PODs then check How many PODs exist now?
+
+five 
+
+Why are there still 5 PODs, even after you deleted one?
+
+the replicaset ensures that the required number of pods are always existing
+
+11- How many Deployments and ReplicaSets exist on the system?
+
+kubectl get ds
+kubectl get rs
+
+zero Deployments
+1 replica set
+
+12- Create a Deployment with
+
+    name= deployment-1
+
+    image= busybox
+
+    replicas= 3
+
+kubectl create -f deployment-1.yaml
+
+13- How many Deployments and ReplicaSets exist on the system now?
+
+kubectl get ds
+kubectl get rs
+
+1 Deployments
+2 replica set
+
+14- How many pods are ready with the deployment-1?
+
+zero
+
+15- Update deployment-1 image to Nginx then check the ready pods again
+
+kubectl apply -f deployment-1.yaml
+
+16- Run kubectl describe deployment deployment-1 and check events 
+
+kubectl describe deployment myapp-deployment-1
+
+What is the deployment strategy used to upgrade the deployment-1? 
+
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+
+17- Rollback the deployment-1 
+
+kubectl describe deployment myapp-deployment-1
+
+What is the used image with the deployment-1?
+
+busybox
+
+18- How many Namespaces exist on the system?
+
+6
+
+kubectl get ns
+
+NAME              STATUS   AGE
+default           Active   6d14h
+finance           Active   5d15h
+kube-node-lease   Active   6d14h
+kube-public       Active   6d14h
+kube-system       Active   6d14h
+production        Active   5d15h
+
+19- How many pods exist in the kube-system namespace?
+
+kubectl get po -n kube-system
+
+NAME                               READY   STATUS    RESTARTS      AGE
+coredns-64897985d-wwrrw            1/1     Running   2 (20h ago)   6d14h
+etcd-minikube                      1/1     Running   2 (20h ago)   6d14h
+kindnet-mmb22                      1/1     Running   2 (20h ago)   6d13h
+kindnet-rjqrk                      1/1     Running   2 (20h ago)   6d13h
+kube-apiserver-minikube            1/1     Running   2 (20h ago)   6d14h
+kube-controller-manager-minikube   1/1     Running   3 (20h ago)   6d14h
+kube-proxy-wfrmk                   1/1     Running   2 (20h ago)   6d14h
+kube-proxy-xb667                   1/1     Running   2 (20h ago)   6d13h
+kube-scheduler-minikube            1/1     Running   2 (20h ago)   6d14h
+storage-provisioner                1/1     Running   5 (20h ago)   6d14h
+
+20- Create a deployment with
+
+     Name: beta
+
+     Image: Redis
+
+     Replicas: 2
+
+     Namespace: finance
+
+     Resources Requests:
+
+       CPU: .5 vcpu
+
+       Mem: 1G
+
+    Resources Limits:
+
+      CPU: 1 vcpu
+
+      Mem: 2G
+
+kubectl create -f beta_deployment.yaml

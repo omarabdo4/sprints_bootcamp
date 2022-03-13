@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: finance
+  name: myapp-deployment-2
+  labels:
+    app: myapp-deployment-2
+
+spec:
+  template:
+    metadata:
+      name: myapp-busybox-pod
+      labels:
+        app: myapp-busybox
+
+    spec:
+      containers:
+        - name: busybox-container
+          image: busybox
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp-busybox

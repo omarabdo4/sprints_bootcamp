@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment-1
+  labels:
+    app: myapp-deployment-1
+
+spec:
+  template:
+    metadata:
+      name: myapp-busybox-pod
+      labels:
+        app: myapp-busybox
+
+    spec:
+      containers:
+        - name: busybox-container
+          image: nginx
+  replicas: 5
+  selector:
+    matchLabels:
+      app: myapp-busybox
