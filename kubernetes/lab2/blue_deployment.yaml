@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue-deployment
+  labels:
+    app: blue-deployment
+
+spec:
+  template:
+    metadata:
+      name: blue-pod
+      labels:
+        app: blue-pod
+
+    spec:
+      containers:
+        - name: busybox-container
+          image: nginx
+      # tolerations:
+      # - key: "color"
+      #   value: "blue"
+      #   effect: "NoSchedule"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: color
+                operator: In
+                values:
+                - blue
+
+  replicas: 3
+  selector:
+    matchLabels:
+      app: blue-pod

@@ -1,0 +1,113 @@
+1- Deploy a pod named nginx-pod using the nginx:alpine image with the labels set to   tier=backend.
+
+kubectl create -f nginx_pod.yaml
+
+2- Deploy a test pod using the nginx:alpine image.
+
+kubectl create -f test_pod.yaml
+
+3- Create a service backend-service to expose the backend application within the cluster on port 80.
+
+kubectl create -f backend_service.yaml
+
+4- try to curl the backend-service from the test pod. What is the response?
+
+nginx default page response
+
+5- Create a deployment named web-app using the image nginx with 2 replicas
+
+kubectl create -f web_app.yaml
+
+6- Expose the web-app as service web-app-service application on port 80 and nodeport 30082 on the nodes on the cluster
+
+kubectl create -f web_app_service.yaml
+
+7- access the web app from the node
+
+curl localhost:80
+
+8- How many Nodes exist on the system?
+
+
+kubectl get nodes
+
+2 nodes
+
+9- Do you see any taints on master ?
+
+kubectl describe nodes | grep Taints
+
+10- Apply a label color=blue to the master node
+
+kubectl label nodes minikube color=blue
+
+11- Create a new deployment named blue with the nginx image and 3 replicas
+     Set Node Affinity to the deployment to place the pods on master only
+     NodeAffinity: requiredDuringSchedulingIgnoredDuringExecution
+     Key: color
+     values: blue
+12- How many DaemonSets are created in the cluster in all namespaces?
+
+kubectl get daemonset -A
+
+13- what DaemonSets exist on the kube-system namespace?
+
+kubectl get ds -n kube-system
+OR
+kubectl describe daemonset -n kube-system
+
+kindnet
+kube-proxy
+
+14- What is the image used by the POD deployed by the kube-proxy DaemonSet
+
+kubectl describe daemonset kube-proxy -n kube-system | grep
+
+Image: k8s.gcr.io/kube-proxy:v1.23.3
+
+15- Deploy a DaemonSet for FluentD Logging. Use the given specifications.
+      Name: elasticsearch
+      Namespace: kube-system
+      Image: k8s.gcr.io/fluentd-elasticsearch:1.20
+
+kubectl create -f fluent_daemonset.yaml
+
+16- Create a taint on node01 with key of spray, value of mortein and effect of NoSchedule
+
+kubectl taint nodes node01 spray=mortein:NoSchedule
+
+17- Create a new pod named mosquito with the NGINX image
+
+kubectl create -f mosquito_pod.yaml
+
+18- What is the state of the mosquito POD?
+
+Running
+
+19- Create another pod named bee with the NGINX image, which has a toleration set to the taint Mortein
+        Image name: nginx
+    • Key: spray
+    • Value: mortein
+    • Effect: NoSchedule
+    • Status: Running
+
+kubectl create -f bee_pod.yaml
+
+20- Remove the taint on master/controlplane, which currently has the taint effect of NoSchedule
+
+kubectl taint nodes minikube color=blue:NoSchedule-
+
+21- What is the state of the pod mosquito now and Which node is the POD mosquito on?
+
+kubectl describe pod mosquito-pod
+
+running on minikube-m02  ( a worker node )
+
+22- Create a job countdown-job.
+The container should be named as container-countdown-job
+Use image debian:latest, and restart policy should be Never.
+Use command for i in ten nine eight seven six five four three two one ; do echo $i ; done
+
+kubectl create -f countdown_job.yaml
+
+kubectl logs countdown-job-42sct
