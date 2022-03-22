@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: red-pod
+  labels:
+    app: red-pod
+
+spec:
+  containers:
+    - name: red-pod-container
+      image: redis
+  initContainers:
+    - name: init-busybox
+      image: busybox
+      command: ["sleep","20"]
