@@ -1,0 +1,11 @@
+---
+- hosts: ec2
+  # remote_user: ec2-user
+  remote_user: sloppy
+  become: yes
+  # vars_prompt:
+  #   - name: password
+  #     prompt: "please enter your password"
+  #     private: yes
+  roles: 
+    - nexus

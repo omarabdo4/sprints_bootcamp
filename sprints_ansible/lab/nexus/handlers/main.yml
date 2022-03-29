@@ -1,0 +1,5 @@
+---
+# handlers file for nexus
+- name: "rename_nexus_3"
+  action: "shell mv {{ nexus_app_dir }}/nexus-3* {{ nexus_app_dir }}/nexus"
+  # action: "shell rename 's/^nexus-3' nexus*"

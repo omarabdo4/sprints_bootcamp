@@ -1,0 +1,85 @@
+---
+# tasks file for nexus
+- name: update yum
+  yum:
+    update_cache: yes
+
+- name: install wget
+  yum:
+    name: wget
+    state: present
+
+- name: install java
+  yum:
+    name: "java-1.8.0-openjdk.x86_64"
+    state: present
+
+- name: "add nexus user"
+  ansible.builtin.user:
+    name: "nexus"
+    state: "present"
+
+- name: "create folder with permissions"
+  file: 
+    path: "{{ nexus_app_dir }}"
+    state: "directory"
+    owner: "nexus"
+    group: "nexus"
+    mode: "777"
+    recurse: true
+    
+- name: "download nexus tar file"
+  ansible.builtin.get_url: 
+    dest: "{{ nexus_app_dir }}/nexus.tar.gz"
+    url: "https://download.sonatype.com/nexus/3/latest-unix.tar.gz"
+
+- name: "unarchive nexus tar file"
+  ansible.builtin.unarchive: 
+    src: "{{ nexus_app_dir }}/nexus.tar.gz"
+    dest: "{{ nexus_app_dir }}/"
+    remote_src: yes
+  # notify: ["rename_nexus_3"]
+
+- name: "rename nexus 3"
+  action: "shell mv {{ nexus_app_dir }}/nexus-3* {{ nexus_app_dir }}/nexus"
+
+- name: "change nexus folder permissions"
+  file: 
+    path: "{{ nexus_app_dir }}/nexus"
+    state: "directory"
+    owner: "nexus"
+    group: "nexus"
+    recurse: true
+
+- name: "change sonatype-work folder permissions"
+  file: 
+    path: "{{ nexus_app_dir }}/sonatype-work"
+    state: "directory"
+    owner: "nexus"
+    group: "nexus"
+    recurse: true
+
+- name: "make 'run_as_user' value = nexus"
+  replace:
+    path: "{{ nexus_app_dir }}/nexus/bin/nexus.rc"
+    regexp: '#run_as_user=""'
+    replace: 'run_as_user="nexus"'
+    # backup: yes
+
+- name: "copy nexus service config template file"
+  template:
+    src: "nexus_service_config"
+    dest: "/etc/systemd/system/nexus.service"
+
+# - name: "change MaxDirectMemorySize in nexus.vmoptions file"
+#   replace:
+#     path: "{{ nexus_app_dir }}/nexus/bin/nexus.vmoptions"
+#     regexp: '(?<=XX\:MaxDirectMemorySize\=).*'
+#     replace: '1000m'
+#     # backup: yes
+
+- name: "start nexus service"
+  ansible.builtin.service:
+    name: "nexus"
+    state: "started"
+    enabled: yes

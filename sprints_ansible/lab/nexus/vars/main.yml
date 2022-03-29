@@ -1,0 +1,4 @@
+---
+# vars file for nexus
+nexus_app_dir: "/home/app"
+user: "ec2-user"
