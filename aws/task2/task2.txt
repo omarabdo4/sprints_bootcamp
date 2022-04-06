@@ -1,0 +1,12 @@
+S_AWS_02: Lab 2
+Task Day 2:
+
+Create VPC
+Create 2 subnets (pub, private)
+Create IGW, RT, NAT GW
+Create 2 SGs (public_sg, private_sg)
+Create 2 instances (one in pub, one in private), and attach them to SG (public_sg, private_sg) in sequence.
+Connect to your public EC2 from your local server
+
+
+Connect to private server from public server
