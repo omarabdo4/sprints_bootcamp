@@ -1,0 +1,7 @@
+1- Create 2 folders in the S3 bucket (Upload_img, compressed_img),
+    then create an alert when upload image to folder (Upload_img) 
+    trigger lambda function to compress a file and add the compressed file to (Compressed_img)
+
+2- Create Cloudformation template for task of day2
+
+in the file named "task4_cloudFormationTemplate.json"
